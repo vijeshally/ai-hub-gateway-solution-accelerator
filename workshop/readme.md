@@ -115,6 +115,7 @@ az provider register --namespace Microsoft.Storage
 az provider register --namespace Microsoft.Web
 az provider register --namespace Microsoft.Logic
 az provider register --namespace Microsoft.Cache
+az provider register --namespace Microsoft.ContainerRegistry
 
 # Verify registration (may take a few minutes to complete)
 az provider list --query "[?registrationState=='Registered'].namespace" -o table
@@ -243,7 +244,11 @@ azd env get-values
 
 ### 3.7 Deploy the Sample Spoke
 
-After `azd up` finishes, run the spoke deployment script from the `workshop` folder.
+After `azd up` finishes, add AZURE_RESOURCE_GROUP env value and then run the spoke deployment script from the `workshop` folder.
+
+```bash
+# Add the RG name to env so that next deploy-spoke-foundry.ps1 script uses it.
+azd env set AZURE_RESOURCE_GROUP rg-citadel-workshop
 
 **PowerShell:**
 ```powershell
